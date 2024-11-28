@@ -1,9 +1,16 @@
 #!/bin/bash
 
+chmod +x minimalSetup.sh
+
 GO_VERSION=1.23.3
 
 # Update and install dependencies
 sudo apt-get update && apt-get install -y \
+    jq \
+    pipx \
+    fzf \
+    vim \
+    neofetch \
     libcurl4-openssl-dev \
     libssl-dev \
     ruby-full \

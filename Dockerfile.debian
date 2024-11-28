@@ -1,0 +1,38 @@
+# Use the official Debian base image
+FROM debian:latest
+
+# Set environment variables (optional)
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Define the username as an argument
+ARG USERNAME=void
+ARG SETUP_SCRIPT=mainSetup.sh
+
+# Create a new user with the defined username (optional)
+RUN useradd -m -s /bin/bash $USERNAME \
+    && echo "$USERNAME:1234" | chpasswd \
+    && adduser $USERNAME sudo 
+
+# Set up the user's home directory
+WORKDIR /home/$USERNAME
+
+# Create the config directory if it doesn't exist
+RUN mkdir -p /home/$USERNAME/config
+
+#install sudo 
+RUN apt-get update && apt-get install -y sudo
+
+# Copy the setup script and configuration files into the container
+COPY $SETUP_SCRIPT .bashrc .bash_profile /home/$USERNAME/config/
+
+# Make the setup script executable
+RUN chmod +x /home/$USERNAME/config/$SETUP_SCRIPT
+
+# Run the setup script
+RUN /home/$USERNAME/config/$SETUP_SCRIPT
+
+# Switch to the non-root user
+USER $USERNAME
+
+# Set the default command to run when the container starts (optional)
+CMD ["bash"]
