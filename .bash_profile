@@ -51,3 +51,8 @@ cnee -rep -f ~/atheer/games/cnee/$1.xns -ns -sk q -v
 #        fi
 #    done
 #}
+
+
+if [ -f ~/.env ]; then
+    export $(cat ~/.env | xargs)
+fi
