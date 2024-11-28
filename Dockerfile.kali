@@ -14,16 +14,13 @@ WORKDIR $WORK_DIR
 
 # Update and install necessary tools in one RUN statement
 RUN apt -y update && apt -y dist-upgrade && apt -y autoremove && apt clean && \
-    apt -y install curl wget vim git net-tools whois netcat-traditional pciutils usbutils && \
-    apt -y install python3-pip golang nodejs npm && \
-    apt -y install kali-tools-top10 exploitdb man-db dirb nikto wpscan uniscan lsof apktool dex2jar ltrace strace binwalk && \
-    apt -y install tor proxychains
+    apt -y install curl wget vim git net-tools whois
 
 # Install sudo
 RUN apt-get update && apt-get install -y sudo
 
 # Copy proxychains config (ensure file exists in build context)
-COPY proxychains.conf /etc/proxychains.conf
+COPY proxychains4.conf /etc/proxychains4.conf
 
 # Create the user and add to sudo group
 RUN useradd -m -s /bin/bash $USERNAME && \

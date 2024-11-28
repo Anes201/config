@@ -1,5 +1,5 @@
 
-sudo apt install subfinder
+sudo apt install kali-linux-headless
 git clone https://github.com/nahamsec/bbht.
 cd bbht
 chmod +x install.sh
