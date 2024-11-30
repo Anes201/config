@@ -25,35 +25,27 @@ full_setup() {
 		fzf \
 		vim \
 		neofetch \
-		libcurl4-openssl-dev \
-		libssl-dev \
-		ruby-full \
-		libxml2 libxml2-dev libxslt1-dev \
-		ruby-dev build-essential libgmp-dev \
-		zlib1g-dev libffi-dev python-dev \
+		build-essential  \
+	    python-dev \
 		python-setuptools python3-pip python-pip \
 		python-dnspython rename xargs \
-		proxychains4 tor wireshark sublist3r \
-		sqlmap ffuf nmap libpcap-dev \
+		proxychains4 tor sublist3r \
+		sqlmap ffuf nmap \
 		golang-go \
-		chromium
+        vim net-tools whois
 
-	# Install Go if not already installed
-	if ! command -v go &> /dev/null; then
-		echo "Go is not installed. Installing Go $GO_VERSION..."
-		wget https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz
-		sudo tar -C /usr/local -xvf go$GO_VERSION.linux-amd64.tar.gz
-		export GOROOT=/usr/local/go
-		export GOPATH=$HOME/go
-		export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-		echo 'export GOROOT=/usr/local/go' >> ~/.bash_profile
-		echo 'export GOPATH=$HOME/go' >> ~/.bash_profile
-		echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile
-		source ~/.bash_profile
-		rm go$GO_VERSION.linux-amd64.tar.gz
-	else
-		echo "Go is already installed."
-	fi
+        # Set GOROOT and GOPATH for the current session
+        export GOROOT=/usr/local/go
+        export GOPATH=$HOME/go
+        export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+        # Add to .bash_profile for future sessions
+        echo 'export GOROOT=/usr/local/go' >> ~/.bash_profile
+        echo 'export GOPATH=$HOME/go' >> ~/.bash_profile
+        echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile
+
+        # Apply the changes immediately
+        source ~/.bash_profile
 
 	# Create tools folder
 	mkdir -p $HOME/tools
@@ -70,6 +62,7 @@ full_setup() {
 		"github.com/projectdiscovery/subfinder/v2/cmd/subfinder"
 		"github.com/hakluke/hakrawler"
 		"github.com/OJ/gobuster/v3"
+		"github.com/ffuf/ffuf/v2"
 	)
 
 	for tool in "${tools[@]}"; do
@@ -114,13 +107,9 @@ full_setup() {
 	echo -e "\n\nAll tools are set up in $HOME/tools"
 }
 
-# Choose setup based on argument (default: minimal)
-echo "Choose setup:\n1) Minimal\n2) Full"; 
-read setup_choice
 
-case "$setup_choice" in
-    1) minimal_setup ;;
-    2) full_setup ;;
-    *) echo "Invalid setup choice. Exiting."; exit 1 ;;
-esac
+minimal_setup
+full_setup
 
+cp proxychains4.conf  /etc/proxychains4.conf
+curl -s https://cht.sh/:cht.sh | sudo tee /usr/local/bin/cht.sh && sudo chmod +x /usr/local/bin/cht.sh

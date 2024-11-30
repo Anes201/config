@@ -1,7 +1,5 @@
-# Kali Linux latest with useful tools by tsumarios
 FROM kalilinux/kali-rolling
 
-# Set environment variables (optional)
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Define the username as an argument

@@ -16,20 +16,17 @@ RUN useradd -m -s /bin/bash $USERNAME \
 # Set up the user's home directory
 WORKDIR /home/$USERNAME
 
-# Create the config directory if it doesn't exist
-RUN mkdir -p /home/$USERNAME/config
-
 #install sudo 
 RUN apt-get update && apt-get install -y sudo
 
 # Copy the setup script and configuration files into the container
-COPY $SETUP_SCRIPT .bashrc .bash_profile /home/$USERNAME/config/
+COPY $SETUP_SCRIPT .bashrc .bash_profile /home/$USERNAME
 
 # Make the setup script executable
-RUN chmod +x /home/$USERNAME/config/$SETUP_SCRIPT
+RUN chmod +x /home/$USERNAME/$SETUP_SCRIPT
 
 # Run the setup script
-RUN /home/$USERNAME/config/$SETUP_SCRIPT
+RUN /home/$USERNAME/$SETUP_SCRIPT
 
 # Switch to the non-root user
 USER $USERNAME
