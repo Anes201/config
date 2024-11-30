@@ -9,7 +9,7 @@ fi
 # Variables
 REPO_URL="$1"
 REPO_NAME=$(basename "$REPO_URL" .git)
-HOME_DIR="$HOME"
+HOME_DIR="$HOME/tools"
 
 # Try installing with pipx directly from the URL
 echo "Attempting to install with pipx..."
