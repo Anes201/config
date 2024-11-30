@@ -30,27 +30,28 @@ sudo apt install -y sqlmap
 sudo apt install -y telnet 
 sudo apt install -y theharvester 
 sudo apt install -y whois
-sudo apt install -y wordlists # large size
-feroxbuster # large size
-gowitness
-aquatone
-waybackurls
-dirsearch
-gau
-gospider
-knock
-fierce
-dnsgen
-https
-meg
-nuclei
-hakrawler
-assetfinder
-naabu
-eyewitness
-massdns
-httprobe
-#sudo apt install seclists
+sudo apt install -y gowitness
+sudo apt install -y aquatone
+sudo apt install -y waybackurls
+sudo apt install -y dirsearch
+sudo apt install -y gau
+sudo apt install -y gospider
+sudo apt install -y knock
+sudo apt install -y fierce
+sudo apt install -y dnsgen
+sudo apt install -y https
+sudo apt install -y meg
+sudo apt install -y nuclei
+sudo apt install -y hakrawler
+sudo apt install -y assetfinder
+sudo apt install -y naabu
+sudo apt install -y eyewitness
+sudo apt install -y massdns
+sudo apt install -y httprobe
+# large size
+#sudo apt install -y wordlists
+#sudo apt install -y feroxbuster 
+#sudo apt install -y seclists 
 
 # 
 pipx install bbot
@@ -95,86 +96,4 @@ GO111MODULE=on go install -v github.com/lc/subjs@latest
 go install -v github.com/musana/fuzzuli@latest
 go install github.com/OJ/gobuster/v3@latest
 
-
-
-
-
-
-    nmap
-    masscan
-    naabu
-    amass
-    GoBuster
-    Knock
-    MassDNS
-    Altdns
-    spyse
-    Sublist3r
-    findomain
-    subfinder
-    spiderfoot
-    haktldextract
-
-
-    subjack
-    SubOver
-    tko-subs
-
-
-    hakrevdns
-
-
-    gowitness
-    aquatone
-
-
-    hakrawler
-    Photon
-    gospider
-    gau
-    otxurls
-    waybackurls
-
-
-    dirsearch
-
-
-    wfuzz
-    ffuf
-
-
-    whatweb
-    wafw00z
-    nikto
-    arjun
-    httprobe
-    striker
-    hakcheckurl
-    httpx
-
-
-    wpscan
-    joomscan
-    droopescan
-    cmseek
-
-
-    LinkFinder
-    getJS
-    subjs
-
-
-    cewl
-        wfuzz
-        SecList
-        Fuzzdb
-        Dirbuster
-        Dirb
-        Rockyou
-        all.txt
-    crunch
-
-Git repositories gitleaks gitrob gitGraber github-search GitTools
-
-    sqlmap XSStrike kxss dalfox jwt_tool jaeles
 
