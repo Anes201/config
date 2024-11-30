@@ -63,18 +63,11 @@ pyget https://github.com/GerbenJavado/LinkFinder
 pyget https://github.com/codingo/NoSQLMap
 pyget https://github.com/claymation/python-builtwith
 pyget https://github.com/xnl-h4ck3r/xnLinkFinder.git
+pyget https://github.com/WangYihang/GitHacker
+pyget https://github.com/m4ll0k/SecretFinder
+pyget https://github.com/securing/DumpsterDiver
 
-
-pipx install git+https://github.com/xnl-h4ck3r/xnLinkFinder.git
-pipx install git+https://github.com/m4ll0k/SecretFinder.git --include-deps
-pipx install git+https://github.com/GerbenJavado/LinkFinder.git --include-deps
-pipx install git+https://github.com/codingo/NoSQLMap.git --include-deps
-pipx install git+https://github.com/claymation/python-builtwith.git --include-deps
-https://github.com/WangYihang/GitHacker
-https://github.com/m4ll0k/SecretFinder
-https://github.com/GerbenJavado/LinkFinder
-https://github.com/securing/DumpsterDiver
-
+# go installations
 go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 CGO_ENABLED=1 go install github.com/projectdiscovery/katana/cmd/katana@latest
 go install github.com/gwen001/github-subdomains@latest
