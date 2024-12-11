@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .  # Context where the Dockerfile resides
+      dockerfile: Dockerfile.debian
+      args:  # Pass build arguments to Dockerfile
+        USERNAME: "void"
+        SETUP_SCRIPT: "mainSetup.sh"
+    volumes:
+      - my-volume:/home/void/  # Persist the config directory
+    environment:  # Pass optional environment variables
+      DEBIAN_FRONTEND: "noninteractive"
+    stdin_open: true  # Keep STDIN open for interactive sessions
+    tty: true         # Allocate a pseudo-TTY
+    user: "void"      # Switch to non-root user
+    command: bash     # Default command to start a shell
+    
+volumes:
+  my-volume:
+

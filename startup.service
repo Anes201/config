@@ -1,0 +1,11 @@
+[Unit]
+Description=My Program
+After=network.target
+
+[Service]
+ExecStart=/home/atheer/config/startup.sh
+Restart=always
+User=atheer
+
+[Install]
+WantedBy=multi-user.target

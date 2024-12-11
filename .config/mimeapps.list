@@ -1,0 +1,13 @@
+[Added Associations]
+application/x-shellscript=org.xfce.mousepad.desktop;geany.desktop;
+text/markdown=org.xfce.mousepad.desktop;
+text/plain=org.xfce.mousepad.desktop;geany.desktop;
+application/x-trash=org.xfce.mousepad.desktop;
+application/pdf=org.gnome.Evince.desktop;
+
+[Default Applications]
+application/x-extension-burp=install4j_62fmcg-BurpSuiteCommunity.desktop
+application/x-trash=org.xfce.mousepad.desktop
+application/pdf=org.gnome.Evince.desktop
+text/plain=geany.desktop
+application/x-shellscript=geany.desktop
