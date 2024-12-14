@@ -1,35 +1,69 @@
-
-# configs
-mkdir ~/tools
+set_tools_dir() {
+TOOLS_DIR= ~/tools
+if [ ! -d "$TOOLS_DIR" ]; then
+ mkdir "$TOOLS_DIR"; 
+fi
 cd ~/tools
+}
+
+set_python() {
+if [[ -f pyvenv ]]
+then
 sudo cp pyvenv /usr/local/bin/pyvenv
 sudo chmod +x /usr/local/bin/pyvenv
+fi
+
+if [[ -f pyget ]]
+then
 sudo cp pyget /usr/local/bin/pyget
 sudo chmod +x /usr/local/bin/pyget
+fi
+}
+
+set_proxychains() {
+sudo apt install tor
+if [[ -f proxychains.conf ]] 
+then
 cp proxychains.conf /etc/proxychains.conf
+fi
+sudo systemctl restart tor
+}
+
+set_profile_config() {
 cp .bashrc ~/.bashrc
 cp .bash_profile ~/.bash_profile
+cp .zshrc ~/.zshrc
 
-GO_VERSION="1.23.3"
-wget https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz
+source ~/.bash_profile
+source ~/.zshrc
+}
+
+set_golang() {
+GO_VERSION="1.23.4"
+wget https://go.dev/dl/$GO_VERSION.linux-amd64.tar.gz
 rm -rf /usr/local/go && tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
 rm go$GO_VERSION.linux-amd64.tar.gz
 
-echo 'export GOROOT=/usr/local/go' >> ~/.bash_profile
-echo 'export GOPATH=$HOME/go' >> ~/.bash_profile
-echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile
+export PATH=$PATH:/usr/local/go/bin >> ~/.bash_profile
+export PATH=$PATH:/usr/local/go/bin >> ~/.zshrc
 
-# Apply the changes immediately
 source ~/.bash_profile
+source ~/.zshrc
+}
 
-# repo installs
-sudo apt update -y && sudo apt upgrade -y
-# core
-sudo apt install -y curl wget vim git whois netcat-traditional tmux nano
-sudo apt install -y python3-pip golang pipx python-is-python3
-sudo apt install ffuf dirb nmap sqlmap wfuzz
-# web
-RUN apt update && apt install -y --no-install-recommends \
+install_core() { 
+sudo apt-get update -y
+sudo apt-get install zsh git curl wget rofi xsel ranger neofetch exa htop tmux redshift tree nano vim
+sudo apt-get install python3-pip python3-venv python-is-python3 golang pipx
+sudo apt-get install firefox chromium ripgrep audacious evince lm-sensors geany yt-dlp psensor
+sudo apt-get install ffuf sqlmap nmap sublist3r dirsearch jsparser masscan wfuzz wapiti dnsmap gobuster gron jq netcat-traditional
+sudo apt-get install xq yq whois yersinia dirb urlextractor dnsenum dnsrecon fierce knockpy recon-ng whatweb wafw00f
+
+curl -s https://cht.sh/:cht.sh | sudo tee /usr/local/bin/cht.sh && sudo chmod +x /usr/local/bin/cht.sh
+}
+
+install_kali_tools() {
+sudo apt update && apt install -y --no-install-recommends \
 0trace                                  \
 7zip						            \
 aesfix		                            \
@@ -409,12 +443,11 @@ xsrfprobe                               \
 xxd                                     \
 yara                                    \
 yersinia                                \
-zonedb					\				
+zonedb									\
 recon-ng 
+}
 
-
-# large size
-
+install_python_tools() {
 git clone https://github.com/nahamsec/crtndstry
 
 pipx install bbot
@@ -440,9 +473,9 @@ pyget https://github.com/s0md3v/Silver
 pyget https://github.com/s0md3v/Zen
 pyget https://github.com/hisxo/gitGraber
 pyget https://github.com/shmilylty/OneForAll
+}
 
-
-# go installations
+install_go_tools() {
 CGO_ENABLED=1 go install github.com/projectdiscovery/katana/cmd/katana@latest
 go install github.com/projectdiscovery/cvemap/cmd/cvemap@latest
 go install github.com/projectdiscovery/tldfinder/cmd/tldfinder@latest
@@ -454,34 +487,40 @@ go install -v github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
 go install -v github.com/projectdiscovery/chaos-client/cmd/chaos@latest
 go install -v github.com/projectdiscovery/proxify/cmd/proxify@latest
 go install github.com/projectdiscovery/alterx/cmd/alterx@latest
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
-go install -v github.com/s0md3v/smap/cmd/smap@latest
-go install github.com/lc/gau/v2/cmd/gau@latest
 go install github.com/tomnomnom/unfurl@latest
-go install github.com/gwen001/github-subdomains@latest
 go install github.com/tomnomnom/meg@latest
+go install -v github.com/tomnomnom/anew@latest
+go install github.com/tomnomnom/httprobe@latest
+go install github.com/tomnomnom/waybackurls@latest
+go install github.com/tomnomnom/qsreplace@latest
 
 GO111MODULE=on go install -v github.com/lc/subjs@latest
 go install -v github.com/musana/fuzzuli@latest
+go install github.com/dwisiswant0/unew
+go install github.com/gwen001/github-subdomains@latest
+go install -v github.com/s0md3v/smap/cmd/smap@latest
+go install github.com/lc/gau/v2/cmd/gau@latest
+}
 
-
-
-
-
-pipx install bbot
+install_configs() {
 git clone https://github.com/nahamsec/bbht.
 cd bbht
 chmod +x install.sh
 ./install.sh
 git clone https://github.com/nahamsec/recon_profile.git
 git clone https://github.com/juice-shop/juice-shop.git --depth 1
-#git clone https://github.com/Dewalt-arch/pimpmykali.git
-#cd pimpmykali
-#sudo ./pimpmykali.sh
-#sudo apt install seclists
-git clone https://github.com/R-s0n/ars0n-framework.git
-git clone https://github.com/R-s0n/Bug_Bounty_Notes.git
+git clone https://github.com/Dewalt-arch/pimpmykali.git
+cd pimpmykali
+sudo ./pimpmykali.sh
+sudo apt install seclists
+}
 
  
-
+set_tools_dir
+install_core
+set_python
+set_profile_config
+set_proxychains
 

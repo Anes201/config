@@ -1,9 +1,7 @@
 neofetch
-if [ -f ~/.env ]; then
-  source ~/.env
-fi
-# vars
 # system aliases
+alias reconftw="docker run -it -v ~/recon/:'/reconftw/Recon/' six2dez/reconftw:main -d $1 -r"
+alias xfce4-terminal='xfce4-terminal --maximize'
 alias i='sudo apt install'
 alias u='sudo apt update && sudo apt upgrade'
 alias x='exit'
@@ -14,16 +12,25 @@ alias dk='sudo docker'
 alias paste='xsel -b -o'
 # convience aliases
 mkpattern(){
-mkdir -p $1 
-echo $2 | fabric -p create_pattern_advanced >> $1/system.md 
+mkdir -p $PATTERNS/$1
+echo $2 | fabric -p create_pattern_advanced >> $PATTERNS/$1/system.md 
 }
-helplinux(){
+asklinux(){
 printf "%s" "$1" | fabric -p help_linux
 }
 snippet(){
 printf "%s" "$1" | fabric -p create_snippet
 }
 # security
+asksec(){
+printf "%s" "$1" | fabric -p ask_sec
+}
+askdev(){
+printf "%s" "$1" | fabric -p ask_dev
+}
+isproxy(){
+curl -x $1:$2 -I https://www.google.com
+}
 # games
 mrc(){
 cnee --record --mouse --keyboard -o ~/atheer/games/cnee/$1.xns -sk q -v
@@ -49,3 +56,9 @@ cnee -rep -f ~/atheer/games/cnee/$1.xns -ns -sk q -v
 if [ -f ~/.env ]; then
     export $(cat ~/.env | xargs)
 fi
+export GOROOT=/usr/bin/go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GOROOT=/usr/bin/go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
