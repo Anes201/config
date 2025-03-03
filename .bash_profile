@@ -6,7 +6,7 @@ alias i='sudo apt install'
 alias u='sudo apt update && sudo apt upgrade'
 alias x='exit'
 alias cimg='convert -resize 50% -quality 85'
-alias ytd='~/atheer/config/scripts/ytd.sh'
+alias ytd='~/scripts/ytd.sh'
 alias myip='curl ifconfig.me'
 alias dk='sudo docker'
 alias paste='xsel -b -o'
@@ -33,18 +33,18 @@ curl -x $1:$2 -I https://www.google.com
 }
 # games
 mrc(){
-cnee --record --mouse --keyboard -o ~/atheer/games/cnee/$1.xns -sk q -v
+cnee --record --mouse --keyboard -o ~/games/cnee/$1.xns -sk q -v
 #-t 0.5
 }
 
 mrp(){
-cnee -rep -f ~/atheer/games/cnee/$1.xns -ns -sk q -v
+cnee -rep -f ~/games/cnee/$1.xns -ns -sk q -v
 }
 
 #mrr(){
 #    for i in $(seq 1 $2); do
 #
-#       cnee -rep -f ~/atheer/games/cnee/$1.xns -ns -sk q
+#       cnee -rep -f ~/games/cnee/$1.xns -ns -sk q
 #       if [ $? -ne 0 ]; then
 #          echo "Replay stopped by user. Exiting loop."
 #          break
