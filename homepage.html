@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Browser Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+        }
+        .bookmarks, .todos {
+            width: 48%;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .todo-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .todo-item button {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+        }
+        .todos ul {
+            max-height: 400px; /* Adjust based on desired viewport height */
+            overflow-y: auto;
+            padding-right: 10px; /* Adjust for scrollbar width */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bookmarks">
+            <h2>Bookmarks</h2>
+            <ul id="bookmarkList"></ul>
+        </div>
+        <div class="todos">
+            <h2>TODOs</h2>
+            <input type="text" id="todoInput" class="todo-input" placeholder="Add a new TODO">
+            <ul id="todoList"></ul>
+        </div>
+    </div>
+    <script>
+        const DEFAULT_BOOKMARKS = [
+        ["Pentester Land", "https://pentester.land/"],
+        ["Hacker101", "https://ctf.hacker101.com/"],
+        ["Portswigger Academy", "https://portswigger.net/web-security/all-topics"],
+        ["TryHackMe", "https://tryhackme.com/"],
+        ["Deepseek", "https://chat.deepseek.com/"],
+        ["ChatGPT", "https://chat.openai.com/"],
+        ["PlantUML", "https://www.planttext.com/"],
+        //["Mail", "https://mail.google.com"],
+        ["ANEM", "https://wassitonline.anem.dz/"],
+        ["Telegram", "https://web.telegram.org"],
+        ];
+
+        const bookmarkList = document.getElementById('bookmarkList');
+
+        DEFAULT_BOOKMARKS.forEach(bookmark => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.textContent = bookmark[0];
+            a.href = bookmark[1];
+            li.appendChild(a);
+            bookmarkList.appendChild(li);
+        });
+
+        const todoInput = document.getElementById('todoInput');
+        const todoList = document.getElementById('todoList');
+
+        function loadTodos() {
+            const todos = JSON.parse(sessionStorage.getItem('todos') || '[]');
+            todoList.innerHTML = '';
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                li.className = 'todo-item';
+                li.textContent = todo;
+                const button = document.createElement('button');
+                button.textContent = 'Delete';
+                button.onclick = () => deleteTodo(index);
+                li.appendChild(button);
+                todoList.appendChild(li);
+            });
+        }
+
+        function addTodo() {
+            const todo = todoInput.value.trim();
+            if (todo) {
+                const todos = JSON.parse(sessionStorage.getItem('todos') || '[]');
+                todos.push(todo);
+                sessionStorage.setItem('todos', JSON.stringify(todos));
+                todoInput.value = '';
+                loadTodos();
+            }
+        }
+
+        function deleteTodo(index) {
+            const todos = JSON.parse(sessionStorage.getItem('todos') || '[]');
+            todos.splice(index, 1);
+            sessionStorage.setItem('todos', JSON.stringify(todos));
+            loadTodos();
+        }
+
+        todoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+
+        loadTodos();
+    </script>
+</body>
+</html>
