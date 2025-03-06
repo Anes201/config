@@ -9,7 +9,7 @@ install_system() {
   sudo apt-get -y install nala zsh git curl wget xsel ranger fastfetch htop tmux tree nano nvim 7zip unrar-free telnet iw vnstat moreutils rofi
   sudo apt-get -y install xclip bat btop lsd translate-shell 7zip jq poppler-utils fd-find ripgrep fzf zoxide detox duf hyperfine
   sudo apt-get -y install python3-pip python3-venv python-is-python3 golang pipx proxychains tor
-  sudo apt-get -y install netcat-traditional speedtest-cli net-tools yt-dlp lm-sensors
+  sudo apt-get -y install netcat-traditional speedtest-cli net-tools yt-dlp lm-sensors dconf-editor
 
   curl -s https://cht.sh/:cht.sh | sudo tee /usr/local/bin/cht.sh && sudo chmod +x /usr/local/bin/cht.sh
 
@@ -27,7 +27,7 @@ install_basic_hunting() {
     sudo apt-get -y install ffuf sqlmap nmap sublist3r dirsearch masscan wfuzz wapiti dnsmap gobuster gron jq
     sudo apt-get -y install xq yq whois yersinia dirb urlextractor dnsenum dnsrecon fierce knockpy recon-ng whatweb wafw00f
     sudo apt-get -y install arp tcpdump sniffnet openvpn httpie
-    sudo apt-get -y install ncrack hashcat
+    sudo apt-get -y install ncrack hashcat cupp
 }
 
 install_zsh() {
