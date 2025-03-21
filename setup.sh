@@ -69,7 +69,7 @@ install_packages() {
 
 install_system() {
   msg "Installing essential system packages..."
-  install_packages nala zsh git curl wget xsel ranger htop tmux tree nano 7zip unrar-free telnet iw vnstat moreutils rofi xclip bat btop lsd translate-shell jq poppler-utils fd-find ripgrep fzf zoxide detox duf hyperfine python3-pip python3-venv python-is-python3 golang pipx proxychains tor netcat-traditional speedtest-cli net-tools yt-dlp lm-sensors dconf-editor docker.io docker-compose
+  install_packages nala zsh git curl wget xsel ranger htop tmux tree nano 7zip unrar-free telnet iw vnstat moreutils rofi xclip btop translate-shell jq poppler-utils ripgrep fzf detox duf hyperfine python3-pip python3-venv python-is-python3 golang pipx proxychains tor netcat-traditional speedtest-cli net-tools yt-dlp lm-sensors dconf-editor docker.io docker-compose
   msg "Essential system packages installed."
 
   msg "Installing cht.sh..."
@@ -137,15 +137,8 @@ install_basic_hunting() {
 }
 
 install_zsh() {
-  msg "Installing Zsh and Powerlevel10k..."
-  install_packages zsh wget
-  if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    msg "Powerlevel10k cloned."
-  else
-    msg "Powerlevel10k already present."
-  fi
-
+  msg "Installing Zsh..."
+  install_packages zsh 
   if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     msg "Oh My Zsh installed."
