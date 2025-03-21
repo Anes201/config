@@ -23,6 +23,11 @@ install_gui() {
   sudo apt install safeeyes
 }
 
+install_ai() {
+    pipx install llm
+    curl -sSL https://raw.githubusercontent.com/aandrew-me/tgpt/main/install | bash -s /usr/local/bin
+    curl -L https://github.com/danielmiessler/fabric/releases/latest/download/fabric-linux-amd64 > fabric && chmod +x fabric && ./fabric --version
+}
 install_basic_hunting() {
     sudo apt-get -y install ffuf sqlmap nmap sublist3r dirsearch masscan wfuzz wapiti dnsmap gobuster gron jq
     sudo apt-get -y install xq yq whois yersinia dirb urlextractor dnsenum dnsrecon fierce knockpy recon-ng whatweb wafw00f
@@ -615,6 +620,7 @@ install_hunting_config() {
 
 
 install_system
+install_ai
 install_gui
 #install_zsh
 #install_nvim
