@@ -91,9 +91,9 @@ install_gui() {
   install_packages firefox chromium audacious evince geany psensor redshift
   if check_command add-apt-repository; then
     if ! grep -q "deb http://ppa.launchpad.net/slgobinath/safeeyes/ubuntu" /etc/apt/sources.list*; then
-      sudo add-apt-repository ppa:slgobinath/safeeyes -y
-      sudo nala update -y
-      sudo nala install safeeyes -y
+      sudo add-apt-repository ppa:safeeyes-team/safeeyes
+      sudo nala update
+      sudo nala install safeeyes
       msg "SafeEyes installed."
     else
       msg "SafeEyes PPA already added."
@@ -140,7 +140,7 @@ install_zsh() {
   msg "Installing Zsh..."
   install_packages zsh 
   if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     msg "Oh My Zsh installed."
   else
     msg "Oh My Zsh is already installed."
@@ -243,7 +243,7 @@ install_golang() {
 
 install_kali_minimal() {
   msg "Installing minimal Kali Linux tools..."
-  sudo nala update && sudo nala install -y --no-install-recommends \
+  sudo nala update && sudo nala install --no-install-recommends \
     7zip \
     amass \
     assetfinder \
@@ -299,7 +299,7 @@ install_kali_minimal() {
 
 install_kali_tools() {
   msg "Installing a large set of Kali Linux tools. This might take a while..."
-  sudo nala update && sudo nala install -y --no-install-recommends \
+  sudo nala update && sudo nala install --no-install-recommends \
     0trace 7zip aesfix aeskeyfind aircrack-ng altdns amass apache-users arjun arping asleap assetfinder atftpd autopsy axel b374k berate-ap bettercap-ui bind9-dnsutils bing-ip2hosts bloodyad bluez braa bruteforce-luks bruteforce-salted-openssl bruteforce-wallet brutespray bully calicoctl capstone-tool ccrypt certgraph chainsaw chisel chntpw cisco7crack cisco-auditing-tool cloudbrute cmseek cntlm colly cowpatty crack creddump7 cri-tools crunch cryptcat cupid-hostapd cupid-wpasupplicant davtest dbd dirb dirsearch dislocker dmitry dns2tcp dnscat2 dnschef dnsenum dnsgen dnsmap dnsrecon dnstracer dnswalk dnsx dos2unix dotdotpwn dscan dumpsterdiver dwarf2json eapmd5pass email2phonenumber emailharvester ethtool evilginx2 evil-ssdp exiflooter exiv2 expect fatcat ffuf fierce finalrecon firewalk fping fragrouter freeradius ftester gdisk getallurls getsploit gitleaks gobuster godoh golang-github-binject-go-donut goldeneye goofile google-nexus-tools gophish goshs gospider gpart gpp-decrypt graudit h8mail hak5-wifi-coconut hakrawler hamster-sidejack hashdeep hashid hash-identifier hashrat hb-honeypot hcxtools heartleech hekatomb horst hostapd-mana hotpatch hping3 htshells httprint httprobe httpx-toolkit httrack ident-user-enum ifenslave ike-scan impacket-scripts inetsim inspy instaloader intrace iodine ipv6toolkit irpas ismtp iw joomscan jsp-file-browser knocker koadic kustomize lapsdumper laudanum lbd libimage-exiftool-perl ligolo-ng linux-exploit-suggester macchanger maskprocessor masscan massdns mdbtools mdk3 mdk4 medusa merlin-agent merlin-server mimikatz minicom miredo mssqlpwner multiforcer multimac mxcheck naabu name-that-hash nasm nbtscan nbtscan nbtscan-unixwiz ncat ncrack ncrack ncurses-hexedit netcat-traditional netdiscover netdiscover netexec netmask netmask netscanner netsed netsniff-ng nextnet nfs-common ngrep nikto nipper-ng nishang nmap nuclei ohrwurm onesixtyone onesixtyone o-saft outguess owl p0f parsero passdetective payloadsallthethings pdfid pdf-parser pdf-parser peirates phishery photon phpggc phpsploit pipal pipx pixiewps pixiewps plocate pnscan pompem portspoof princeprocessor proxify proxify proximoth proxychains4 proxytunnel pskracker pspy ptunnel pwnat pwncat pyinstxtractor python3-ldapdomaindump python3-wsgidav python-is-python3 qsslcaudit rake raven reaver rebind reconspider redsocks reglookup rephrase responder rfkill ridenum rling robotstxt ropper routersploit rsmangler rtpbreak rtpflood rtpinsertsound rtpmixsound ruby-pedump s3scanner sakis3g samba samdump2 sara sbd scalpel screen scrounge-ntfs sctpscan sendemail sentrypeer sfuzz sharpshooter shed shellfire sickle-tool sidguesser siege sigma-cli silenttrinity siparmyknife sipp sipsak skipfish skipfish sleuthkit slowhttptest smbmap sn0int snmp snmpcheck snmpd snmpenum snowdrop socat spike spike sploitscan spooftooph sqlmap sqlmc sqlninja sqlsus ssldump sslh sslscan sslsniff sslsplit sslstrip sslyze statsprocessor stegcracker steghide stegsnow stunnel4 subfinder subjack sublist3r swaks syft t50 tcpdump tcpflow tcpick tcpreplay telnet testdisk testssl.sh tftp-hpa thc-ipv6 thc-pptp-bruter thc-ssl-dos tlssled tnscmd10g traceroute truecrack trufflehog tundeep udptunnel unblob undbx unhide unhide.rb uniscan unix-privesc-check unrar upx-ucl vboot-kernel-utils vboot-utils villain vlan voiphopper vpnc wafw00f wapiti waybackpy wce wce webacoo web-cache-vulnerability-scanner webshells weevely wfuzz wgetpaste whatmask whatweb whois wifi-honey wig wig-ng windows-binaries winexe witnessme wmi-client wordlistraider wpa-sycophant wpscan xmount xsrfprobe xxd yara yersinia zonedb recon-ng
   msg "Large set of Kali Linux tools installed."
 }
